@@ -109,31 +109,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="lZw-HT-CGm">
-                                <rect key="frame" x="10" y="66" width="580" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="UNl-dA-omk"/>
-                                    <constraint firstAttribute="width" constant="100" id="wUB-Zc-Ea9"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="wUB-Zc-Ea9"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="4bJ-lV-ms8"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ext-3a-lJY" secondAttribute="trailing" id="2aC-ws-tYT"/>
                             <constraint firstItem="ext-3a-lJY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="HzA-Ak-5NI"/>
                             <constraint firstItem="ext-3a-lJY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NKD-Hm-zT9"/>
-                            <constraint firstAttribute="trailing" secondItem="lZw-HT-CGm" secondAttribute="trailing" constant="10" id="P5G-m7-Xjd"/>
-                            <constraint firstItem="lZw-HT-CGm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="c4R-rQ-P8H"/>
-                            <constraint firstItem="lZw-HT-CGm" firstAttribute="top" secondItem="nCu-cZ-G40" secondAttribute="bottom" constant="2" id="miB-kw-9Ic"/>
                             <constraint firstItem="T42-e0-Kr7" firstAttribute="top" secondItem="ext-3a-lJY" secondAttribute="bottom" id="sIL-GU-Yd7"/>
                         </constraints>
                     </view>
@@ -145,20 +126,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="fv2-QW-Q0T" id="IVI-yT-V7s"/>
                         <outlet property="tableView" destination="ext-3a-lJY" id="R1X-5D-1o1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="fv2-QW-Q0T">
-                    <connections>
-                        <outlet property="delegate" destination="vXZ-lx-hvc" id="O3r-dH-UWW"/>
-                        <outlet property="searchBar" destination="lZw-HT-CGm" id="bUa-RF-qql"/>
-                        <outlet property="searchContentsController" destination="vXZ-lx-hvc" id="VAL-he-i1X"/>
-                        <outlet property="searchResultsDataSource" destination="vXZ-lx-hvc" id="B5L-I9-hUU"/>
-                        <outlet property="searchResultsDelegate" destination="vXZ-lx-hvc" id="VCM-At-lur"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="800" y="130"/>
         </scene>

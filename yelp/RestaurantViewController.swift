@@ -6,9 +6,18 @@
 //  Copyright (c) 2014 Niaz Jalal. All rights reserved.
 //
 
-import UIKit
+/*
+NAJ: Fix List
+    - Categories data from YELP API
+    - Search Page Search Bar in NavigationController
+    - Distance using Location
+    -
+*/
 
-class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource/*, FilterViewControllerDelegate*/ {
+import UIKit
+import CoreLocation
+
+class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate/*, FilterViewControllerDelegate*/ {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -23,6 +32,9 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
     let yelpTokenSecret = "kcuTdp5ccBcUDi4OzGEb5kf8NTI"
     var isExpanded: [Int:Bool] = [Int:Bool]()
     
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
+
     required init(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -57,6 +69,12 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         // Do any additional setup after loading the view, typically from a nib.
         
         //tableView.rowHeight = UITableViewAutomaticDimension
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,10 +143,30 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         println("\(address)")
         */
         
-        /* NAJ: TOFIX - using phone number for distance */
+        var trip = "0.2 miles"
+        
+        var loc = restaurant["region"]?["center"]? as? NSArray
+        //var lat = loc["lattitude"] as String!
+        
+        println("\(loc)")
+        
+        if locationManager.location != nil {
+            //var lat = restaurant["location"]!["coordinate"]!["lattitude"] as NSString!
+            //var long = restaurant["location"]!["coordinate"]!["longitude"]! as NSString!
+            //var newLocation = CLLocation(latitude: restaurant["location"]!["coordinate"]!["lattitude"]! as CLLocationDegrees!, longitude: restaurant["location"]!["coordinate"]!["longitude"]! as CLLocationDegrees!)
+            
+        } else {
+            trip = "0.8 miles"
+        }
+        //println("\(locationManager.location)")
+        
+        //println("\(locationManager.location.coordinate.latitude)")
+        //println("\(locationManager.location.coordinate.longitude)")
+        
+        /* NAJ: TOFIX - using hard-coded value for distance */
         cell.restaurantImageView.setImageWithURL(NSURL(string: restaurant["image_url"] as NSString))
         cell.restaurantLabel.text = restaurant["name"] as? NSString
-        cell.distanceLabel.text = restaurant["phone"] as? NSString
+        cell.distanceLabel.text = trip
         cell.ratingImageView.setImageWithURL(NSURL(string: restaurant["rating_img_url"] as NSString))
         cell.reviewsLabel.text = reviews
         cell.addressLabel.text = address
@@ -204,5 +242,28 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
     
         // TODO:
     }*/
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        //println("locations = \(locations)")
+        
+        //println("\(locationManager.location.coordinate.latitude)")
+        //println("\(locationManager.location.coordinate.longitude)")
+        
+        //currentLocation.coordinate.latitude = 0
+        //currentLocation.coordinate.longitude = 0
+        
+        currentLocation = CLLocation(latitude: locationManager.location.coordinate.latitude, longitude: locationManager.location.coordinate.longitude)
+        
+        var xLocation: CLLocation = CLLocation(latitude: locationManager.location.coordinate.latitude, longitude: locationManager.location.coordinate.longitude)
+        
+        var newLocation: CLLocation = CLLocation(latitude: 1, longitude: 2)
+        
+        var distance = currentLocation.distanceFromLocation(newLocation)
+        
+        var xdistance = xLocation.distanceFromLocation(newLocation)
+        
+        //println("\(distance)")
+    }
 }
 
