@@ -119,11 +119,27 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dAr-Gv-6vB">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Filters" id="haM-OH-J2a">
                             <connections>
                                 <segue destination="F5r-H6-ruw" kind="presentation" id="BOO-9d-lkF"/>
                             </connections>
                         </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="JfM-RY-WHB">
+                            <rect key="frame" x="180" y="2" width="240" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ioj-4P-j4j">
+                                    <rect key="frame" x="0.0" y="-4" width="240" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="vXZ-lx-hvc" id="bbM-tF-hLd"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ext-3a-lJY" id="R1X-5D-1o1"/>
@@ -131,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="130"/>
+            <point key="canvasLocation" x="792" y="130"/>
         </scene>
         <!--Filters-->
         <scene sceneID="LuM-8g-gWl">
@@ -149,20 +165,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="x1J-wR-sIE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="x1J-wR-sIE" customClass="PriceCell" customModule="yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1J-wR-sIE" id="BgJ-GG-rJf">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUc-nB-o3t">
-                                                    <rect key="frame" x="17" y="0.0" width="40" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUc-nB-o3t">
+                                                    <rect key="frame" x="20" y="5" width="40" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="UXe-Ly-eT6"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TTA-Eq-cC3">
-                                                    <rect key="frame" x="17" y="35" width="566" height="29"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TTA-Eq-cC3">
+                                                    <rect key="frame" x="20" y="35" width="179" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="37g-gE-fPI"/>
+                                                    </constraints>
                                                     <segments>
                                                         <segment title="$"/>
                                                         <segment title="$$"/>
@@ -171,6 +193,12 @@
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="7RR-qh-oCx"/>
+                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="top" secondItem="vUc-nB-o3t" secondAttribute="bottom" constant="5" id="Kk1-a0-qbJ"/>
+                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="top" secondItem="BgJ-GG-rJf" secondAttribute="top" constant="5" id="Qdy-uI-AaX"/>
+                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="SbF-A3-GUB"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="R55-LM-equ">
@@ -209,9 +237,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJO-3D-RvN">
-                                                    <rect key="frame" x="10" y="32" width="200" height="40"/>
-                                                </pickerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -227,9 +252,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iih-7O-Uf2">
-                                                    <rect key="frame" x="0.0" y="32" width="200" height="40"/>
-                                                </pickerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>

@@ -7,23 +7,26 @@
 //
 
 import UIKit
-/*
+
 protocol FilterViewControllerDelegate {
     
-    func searchTermDidChange
-}*/
+    func searchTermDidChange(filterViewController: FilterViewController)
+}
 
-class FilterViewController: UIViewController/*, UITableViewDelegate, UITableViewDataSource*/ {
+class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var FilterTableView: UITableView!
     
-    //var delegate: FilterViewControllerDelegate
+    required init(coder aDecoder: NSCoder) {
+        
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /*FilterTableView.dataSource = self
-        FilterTableView.delegate = self*/
+        FilterTableView.dataSource = self
+        FilterTableView.delegate = self
         
         self.FilterTableView.reloadData()
         // Do any additional setup after loading the view.
@@ -36,13 +39,15 @@ class FilterViewController: UIViewController/*, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return 1
     }
-    /* NAJ: To Fix
-    func func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-        var cell = FilterTableView.dequeueReusableCellWithIdentifier("PriceCell") as PriceCell!
-    }*/
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        var cell = FilterTableView.dequeueReusableCellWithIdentifier("PriceCell") as? PriceCell!
+        
+        return cell!
+    }
     
     @IBAction func onCancelButton(sender: AnyObject) {
     

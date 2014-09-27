@@ -8,8 +8,8 @@
 
 /*
 NAJ: Fix List
-    - Categories data from YELP API
-    - Search Page Search Bar in NavigationController
+    - Categories data from YELP API: FIXED
+    - Search Page Search Bar in NavigationController: FIXED
     - Distance using Location
     -
 */
@@ -17,7 +17,7 @@ NAJ: Fix List
 import UIKit
 import CoreLocation
 
-class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate/*, FilterViewControllerDelegate*/ {
+class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, UISearchBarDelegate/*, FilterViewControllerDelegate*/ {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -61,11 +61,6 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
                 println(error)
         }
         
-        /*RestaurantObject.searchWithQuery("Thai") { (restaurants: [RestaurantObject], error: NSError())
-            
-            
-        }*/
-        
         // Do any additional setup after loading the view, typically from a nib.
         
         //tableView.rowHeight = UITableViewAutomaticDimension
@@ -106,34 +101,31 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
 
         var count = restaurant["review_count"] as Int
         var reviews = "\(count) Reviews"
-        var addressList = restaurant["location"]!["display_address"] as? NSArray
-        var address = addressList?.componentsJoinedByString(", ") as String!
-        /*var categoryList = restaurant["categories"]! as? NSArray
-        //var categories = categoryList?.componentsJoinedByString(", ") as String!
-        
-        var categories: NSMutableArray
+        var address = ""
+        if let addressList = restaurant["location"]!["display_address"] as? NSArray {
+            address = addressList.componentsJoinedByString(", ") as String!
+        }
+        var categories = ""
         
         for category in restaurant["categories"] as NSArray! {
-            for item in category as String {
+            for item in category as NSArray {
             
-                categories.addObjectsFromArray(item)
+                categories = category.firstObject as String!
             }
-            
-            //println("\(category)")
-            
-        }*/
+        }
         
-        //println("categoryList:\n  \(categoryList)")
-        //println("categories:\n   \(categories)")
-        
-        //println("\(address)")
-        //println("\(reviews)")
-        
-        /*if let location = restaurant["location"] as? NSDictionary {
-            let address = location["city"] as? NSDictionary
-            println("\(location)")
-            println("\(address)")
-        }*/
+        /* NAJ: Need to fix parsing for latitude/longitude */
+        if let location = restaurant["location"] as? NSDictionary {
+            if let coordinate = location["coordinate"] as? NSDictionary {
+                let latitude = coordinate["latitude"] as? NSString
+                let longitude = coordinate["longitude"] as? NSString
+                
+                println("\(location)")
+                println("\(coordinate)")
+                println("\(latitude)")
+                println("\(longitude)")
+            }
+        }
         //var location = restaurant["location"] as? NSDictionary
         //var address = location[location["address"]] as? NSArray
         //println("\(location)")
@@ -148,7 +140,7 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         var loc = restaurant["region"]?["center"]? as? NSArray
         //var lat = loc["lattitude"] as String!
         
-        println("\(loc)")
+        //println("\(loc)")
         
         if locationManager.location != nil {
             //var lat = restaurant["location"]!["coordinate"]!["lattitude"] as NSString!
@@ -164,16 +156,16 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         //println("\(locationManager.location.coordinate.longitude)")
         
         /* NAJ: TOFIX - using hard-coded value for distance */
-        cell.restaurantImageView.setImageWithURL(NSURL(string: restaurant["image_url"] as NSString))
+        if let imageURL = restaurant["image_url"] as? NSString {
+            cell.restaurantImageView.setImageWithURL(NSURL(string: imageURL))
+        }
+        
         cell.restaurantLabel.text = restaurant["name"] as? NSString
         cell.distanceLabel.text = trip
         cell.ratingImageView.setImageWithURL(NSURL(string: restaurant["rating_img_url"] as NSString))
         cell.reviewsLabel.text = reviews
         cell.addressLabel.text = address
-        /* NAJ: TOFIX - using hardcoded value for category */
-        cell.categoriesLabel.text = "Thai, thai"
-        //cell.categoriesLabel.text = categories
-
+        cell.categoriesLabel.text = categories
 
         /* colors */
         cell.restaurantLabel.textColor = UIColor.blackColor()
@@ -264,6 +256,26 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         var xdistance = xLocation.distanceFromLocation(newLocation)
         
         //println("\(distance)")
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        client.searchWithTerm(searchText, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            //println(response)
+            
+            self.restaurants = (response as NSDictionary)["businesses"] as [NSDictionary]
+            
+            self.tableView.reloadData()
+            }) { (operation:AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                println(error)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
     }
 }
 
