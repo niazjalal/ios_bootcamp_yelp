@@ -27,6 +27,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         FilterTableView.dataSource = self
         FilterTableView.delegate = self
+        FilterTableView.rowHeight = UITableViewAutomaticDimension
         
         self.FilterTableView.reloadData()
         // Do any additional setup after loading the view.

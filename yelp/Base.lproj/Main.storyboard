@@ -165,25 +165,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="x1J-wR-sIE" customClass="PriceCell" customModule="yelp" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PriceCell" rowHeight="100" id="x1J-wR-sIE" customClass="PriceCell" customModule="yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1J-wR-sIE" id="BgJ-GG-rJf">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUc-nB-o3t">
-                                                    <rect key="frame" x="20" y="5" width="40" height="25"/>
+                                                    <rect key="frame" x="20" y="5" width="37" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="UXe-Ly-eT6"/>
+                                                        <constraint firstAttribute="height" constant="25" id="xJ0-my-eCP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TTA-Eq-cC3">
-                                                    <rect key="frame" x="20" y="35" width="179" height="31"/>
+                                                    <rect key="frame" x="20" y="40" width="560" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="37g-gE-fPI"/>
+                                                        <constraint firstAttribute="height" constant="30" id="YI4-cC-LMe"/>
                                                     </constraints>
                                                     <segments>
                                                         <segment title="$"/>
@@ -194,10 +194,11 @@
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="7RR-qh-oCx"/>
-                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="top" secondItem="vUc-nB-o3t" secondAttribute="bottom" constant="5" id="Kk1-a0-qbJ"/>
-                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="top" secondItem="BgJ-GG-rJf" secondAttribute="top" constant="5" id="Qdy-uI-AaX"/>
-                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="SbF-A3-GUB"/>
+                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="top" secondItem="vUc-nB-o3t" secondAttribute="bottom" constant="10" id="Ekz-j7-697"/>
+                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="top" secondItem="BgJ-GG-rJf" secondAttribute="top" constant="5" id="JfV-5s-hpG"/>
+                                                <constraint firstItem="TTA-Eq-cC3" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="lSS-Lv-EoX"/>
+                                                <constraint firstAttribute="trailing" secondItem="TTA-Eq-cC3" secondAttribute="trailing" constant="20" id="nuY-Kk-oqU"/>
+                                                <constraint firstItem="vUc-nB-o3t" firstAttribute="leading" secondItem="BgJ-GG-rJf" secondAttribute="leading" constant="20" id="ygp-FV-gm1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -269,8 +270,12 @@
                         <constraints>
                             <constraint firstItem="KRX-x9-R7Z" firstAttribute="leading" secondItem="X3c-c9-bgX" secondAttribute="leading" id="3l6-Xu-aqy"/>
                             <constraint firstItem="PzM-iJ-vy6" firstAttribute="top" secondItem="KRX-x9-R7Z" secondAttribute="bottom" id="AW1-GD-iFg"/>
+                            <constraint firstItem="KRX-x9-R7Z" firstAttribute="top" secondItem="X3c-c9-bgX" secondAttribute="top" id="HVO-KB-IYG"/>
+                            <constraint firstItem="PzM-iJ-vy6" firstAttribute="top" secondItem="KRX-x9-R7Z" secondAttribute="bottom" id="Hki-Lj-Oo9"/>
+                            <constraint firstAttribute="trailing" secondItem="KRX-x9-R7Z" secondAttribute="trailing" id="Th3-dr-G2e"/>
                             <constraint firstAttribute="trailing" secondItem="KRX-x9-R7Z" secondAttribute="trailing" id="V5y-wt-dLc"/>
                             <constraint firstItem="KRX-x9-R7Z" firstAttribute="top" secondItem="X3c-c9-bgX" secondAttribute="top" id="aXN-Sp-mUe"/>
+                            <constraint firstItem="KRX-x9-R7Z" firstAttribute="leading" secondItem="X3c-c9-bgX" secondAttribute="leading" id="h3c-k9-Row"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Filters" id="80J-SY-EVl">
@@ -291,7 +296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01n-B3-UdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2147" y="130"/>
+            <point key="canvasLocation" x="2147" y="129"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mIF-nR-wYs">
