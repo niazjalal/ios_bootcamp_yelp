@@ -8,10 +8,10 @@
 
 import UIKit
 
-let yelpConsumerKey = "SMlMhJm5UsH9l3XdPBektg"
-let yelpConsumerSecret = "NsBLz8t-KtTKHavxqz0dg1-KKG4"
-let yelpToken = "VV7yKcNj5dwonncNX7JSyEgIQDu6cOfj"
-let yelpTokenSecret = "kcuTdp5ccBcUDi4OzGEb5kf8NTI"
+let yelpConsumerKey = "XXXXXX"
+let yelpConsumerSecret = "XXXXXX"
+let yelpToken = "XXXXXX"
+let yelpTokenSecret = "XXXXXX"
 
 class YelpClient: BDBOAuth1RequestOperationManager {
     
